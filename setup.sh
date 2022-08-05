@@ -64,3 +64,4 @@ if [ "$DEPLOYMENT" == "localhost" ]; then
 else
   echo "Deploying to Docker"
 fi
+ 
