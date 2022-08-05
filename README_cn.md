@@ -1,14 +1,12 @@
-English | [简体中文](./README_cn.md)
-
 # Papilot
 
-Papilot - an open-source GitHub Copilot server based PaddleNLP
+Papilot - 一个基于 PaddleNLP 的开源 GitHub Copilot 服务
 
-## Uses
+## 使用
 
-### setup
+### 配置
 
-run the setup script. The inference model will be configured and how it will be deployed.
+运行 setup 脚本，将会配置使用何种模型以及采用何种方式部署。
 
 ```shell
 Models available:
@@ -41,13 +39,13 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 INFO 2022-08-05 18:52:50,599 server.py:207] Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-This will configure the runtime environment variables and deploy a [FastAPI](https://fastapi.tiangolo.com/) backend service.
+这将会配置运行环境变量并部署一个 [FastAPI](https://fastapi.tiangolo.com/) 后端服务。
 
-> The backend can be started via `python main.py` if `config.env` exists
+存在 `config.env` 的情况下可以通过`python main.py`启动后端
 
 ## API
 
-After the above is completed, the monitoring service will be started at `http://0.0.0.0:8000`. You can test (partially supported) through the standard [OpenAI API](https://beta.openai.com/docs/api-reference/completions/create), for example:
+在上述完成后，将会在`http://0.0.0.0:8000`开启监听服务。你可以通过标准的[OpenAI API](https://beta.openai.com/docs/api-reference/completions/create)进行测试(部分支持)，例如：
 
 ```python
 $ ipython
@@ -87,13 +85,11 @@ Out[5]:
 }
 ```
 
-Or test via swagger at http://0.0.0.0:8000/docs
-
 ## Copilot Plugin
 
-Just like [fauxpilot](https://github.com/moyix/fauxpilot) we can set `settings.json` to modify the backend address of the Copilot plugin.
+就像[fauxpilot](https://github.com/moyix/fauxpilot)一样，我们可以设置 settings.json 来修改 Copilot 插件的后端地址。
 
-> Unfortunately, no relevant documentation was found. Only this [discuss](https://github.com/community/community/discussions/19537) is relevant
+> 遗憾的是并未找到相关的文档，只有一个与之相关的[讨论](https://github.com/community/community/discussions/19537)
 
 ```json
     "github.copilot.advanced": {
@@ -103,10 +99,6 @@ Just like [fauxpilot](https://github.com/moyix/fauxpilot) we can set `settings.j
     }
 ```
 
-## Notes
+## 注意
 
-The inference speed of the current inference service is relatively slow, so there is a `LOCK_MAX_TOKENS` environment variable in `setup.sh` to lock the maximum length to improve the inference speed. If you want to experience more powerful completion, you can increase the value of this variable.
-
-## Acknowledge
-
-This repo references the [FauxPilot](https://github.com/moyix/fauxpilot) repo, without his work there would be no following. Thank.
+现在的推理服务的推理速度比较缓慢，所以在`setup.sh`中有一个`LOCK_MAX_TOKENS`的环境变量用于锁定最大的长度，以提高推理的速度。若想体验更强大的补全可以提高该变量值。
