@@ -1,7 +1,7 @@
 fastapi
 loguru
 paddlenlp
-paddlepaddle
+paddlepaddle>=2.3
 uvicorn
 sse-starlette
 asyncio
