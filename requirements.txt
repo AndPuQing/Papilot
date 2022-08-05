@@ -1,0 +1,7 @@
+fastapi
+loguru
+paddlenlp
+paddlepaddle
+uvicorn
+sse-starlette
+asyncio
