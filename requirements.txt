@@ -5,3 +5,5 @@ paddlepaddle
 uvicorn
 sse-starlette
 asyncio
+python-dotenv
+regex

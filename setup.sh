@@ -43,9 +43,11 @@ if [ -z "$DEPLOYMENT" ]; then
   DEPLOYMENT="localhost"
 fi
 
-echo "Port to use:"
 read -p "Port [8000]: " PORT
 PORT=${PORT:-8000}
+
+echo "lock_max_tokens [16]: " LOCK_MAX_TOKENS
+LOCK_MAX_TOKENS=${LOCK_MAX_TOKENS:-16}
 
 # Write config.env
 echo "MODEL=${MODEL}" >config.env
@@ -54,7 +56,10 @@ echo "PORT=${PORT}" >>config.env
 
 if [ "$DEPLOYMENT" == "localhost" ]; then
   echo "Deploying to localhost"
-  pip install -r requirements.txt
+  echo "install dependencies......"
+  pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+  echo "done"
+  echo "starting server......"
   python main.py
 else
   echo "Deploying to Docker"

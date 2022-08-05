@@ -67,7 +67,7 @@ async def gen(item: InputModel):
     inputs = {k: paddle.to_tensor(v) for (k, v) in inputs.items()}
     output, score = codegen.generate(
         inputs["input_ids"],
-        max_length=16,
+        max_length=env_dist.get("LOCK_MAX_TOKENS", item.max_tokens),
         decode_strategy="sampling",
         top_k=item.top_k,
         repetition_penalty=item.repetition_penalty,
