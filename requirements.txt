@@ -1,9 +1,2 @@
-fastapi
-loguru
-paddlenlp
-paddlepaddle>=2.3
-uvicorn
-sse-starlette
-asyncio
+rich
 python-dotenv
-regex

@@ -47,7 +47,7 @@ This will configure the runtime environment variables and deploy a [FastAPI](htt
 
 ## API
 
-After the above is completed, the monitoring service will be started at `http://0.0.0.0:8000`. You can test (partially supported) through the standard [OpenAI API](https://beta.openai.com/docs/api-reference/completions/create), for example:
+After the above is completed, the listening service will be started at `http://0.0.0.0:8000`. You can test (partially supported) through the standard [OpenAI API](https://beta.openai.com/docs/api-reference/completions/create), for example:
 
 ```python
 $ ipython

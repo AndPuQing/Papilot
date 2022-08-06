@@ -1,6 +1,5 @@
 import os
 import sys
-import traceback
 from dotenv import load_dotenv
 
 if getattr(sys, 'frozen', False):
@@ -11,4 +10,4 @@ else:
     bundle_path = os.path.dirname(os.path.abspath(__file__))
     root_path = os.path.dirname(bundle_path)
 
-load_dotenv(dotenv_path=os.path.join(root_path, 'config.env'))
+load_dotenv(dotenv_path=os.path.join(root_path, '../config.env'))
