@@ -2,6 +2,6 @@ version: '3.4'
 
 services:
   papilot:
-    image: papilot
+    image: puqingee/papilot
     ports:
       - 8000:8000

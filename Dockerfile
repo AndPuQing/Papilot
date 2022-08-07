@@ -15,4 +15,4 @@ RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 WORKDIR /papilot
 COPY /papilot /papilot
 
-CMD ["python main.py"]
+CMD ["python","main.py"]
