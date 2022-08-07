@@ -4,6 +4,15 @@ English | [简体中文](./README_cn.md)
 
 Papilot - an open-source GitHub Copilot server based PaddleNLP
 
+## Support
+
+|      |           |        |
+| :--: | :-------: | :----: |
+|      | localhost | Docker |
+| CPU  |    ✅     |   ✅   |
+| GPU  |    ✅     |   ❌   |
+| GPUS |    ❌     |   ❌   |
+
 ## Uses
 
 ### Windows
