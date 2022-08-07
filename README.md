@@ -76,11 +76,11 @@ Configuration completed...
 Enter to start deployment:
 ```
 
+> Under the windows terminal, only localhost can be deployed, you should run in wsl
+
 ### Linux
 
-run the setup script. The inference model will be configured.
-
-or run the python script.
+Run the `setup.sh` script or run the python script`python setup.py(recommend)`. The inference model will be configured.
 
 ```shell
 Models available:

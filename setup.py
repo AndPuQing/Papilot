@@ -136,7 +136,7 @@ console.input("[bold green]Enter to start deployment: ")
 
 with console.status("[bold green]Deploying model..."):
     if config["DEPLOY_METHOD"] == "Docker":
-        pass
+        os.system("docker-compose up -d")
     else:
         os.system("cd papilot && pip install -r requirements.txt")
         from papilot import main

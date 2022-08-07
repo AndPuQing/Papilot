@@ -9,7 +9,7 @@ import random
 import string
 import json
 from sse_starlette.sse import EventSourceResponse
-from .config import *
+from config import *
 
 
 class InputModel(BaseModel):
