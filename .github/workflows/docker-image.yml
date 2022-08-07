@@ -6,6 +6,7 @@ on:
 env:
   # Docker image name
   IMAGE_NAME: papilot
+  VERSION: $(date +%s)
 
 jobs:
 
@@ -16,17 +17,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $IMAGE_NAME:$(date +%s)
+      run: docker build . --file Dockerfile --tag $IMAGE_NAME:$VERSION
     
     - name: Log into registry
       run: echo "${{ secrets.ACCESS_TOKEN }}" | docker login -u puqingee --password-stdin
     - name: Push image
       run: |
-        IMAGE_ID=$IMAGE_NAME
-        VERSION=latest
-        echo IMAGE_ID=$IMAGE_ID
-        echo VERSION=$VERSION
-        # 设置镜像 id 和版本号
-        docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-        # 进行 push
-        docker push $IMAGE_ID:$VERSION
+        docker tag $IMAGE_NAME puqingee/$IMAGE_NAME
+        docker push puqingee/$IMAGE_NAME
