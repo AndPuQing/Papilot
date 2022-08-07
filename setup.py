@@ -68,7 +68,7 @@ else:
     set_key(dotenv_path="papilot/config.env", key_to_set="NUM_GPUS", value_to_set="1")
 
 # Lock token length
-console.print("[italic yellow]Too long tokens will affect the experience.")
+console.print("[italic yellow]Too long tokens will affect the speed.")
 token = console.input("[bold green]Enter lock token length \\[default: 32]: ")
 if token.isdigit():
     set_key(

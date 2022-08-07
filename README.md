@@ -6,9 +6,72 @@ Papilot - an open-source GitHub Copilot server based PaddleNLP
 
 ## Uses
 
-### setup
+### Windows
 
-run the setup script. The inference model will be configured and how it will be deployed.
+First, install the dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Then, run the `python setup.py`
+
+```bash
+██████╗  █████╗ ██████╗ ██╗██╗      ██████╗ ████████╗
+██╔══██╗██╔══██╗██╔══██╗██║██║     ██╔═══██╗╚══██╔══╝
+██████╔╝███████║██████╔╝██║██║     ██║   ██║   ██║
+██╔═══╝ ██╔══██║██╔═══╝ ██║██║     ██║   ██║   ██║
+██║     ██║  ██║██║     ██║███████╗╚██████╔╝   ██║
+╚═╝     ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚═════╝    ╚═╝
+
+An open-source GitHub Copilot server based PaddleNLP
+
+
+                 Models available
+
+  ID   Model                VRAM   Languages
+ ─────────────────────────────────────────────────
+  1    codegen-350M-mono    2GB    Python-only
+  2    codegen-350M-multi   2GB    multi-language
+  3    codegen-2B-mono      7GB    Python-only
+  4    codegen-2B-multi     7GB    multi-language
+  5    codegen-6B-mono      13GB   Python-only
+  6    codegen-6B-multi     13GB   multi-language
+  7    codegen-16B-mono     32GB   Python-only
+  8    codegen-16B-multi    32GB   multi-language
+
+Select model [default: 1]:
+Enter number of GPUs [default: 1]:
+Too long tokens will affect the speed.
+Enter lock token length [default: 32]: 16
+  Deploy method
+
+  ID   Method
+ ────────────────
+  1    Docker
+  2    localhost
+
+Where do you want to deploy the model? [default: localhost]:
+Enter port [default: 8000]:
+Configuration completed...
+                 Configuration
+
+  Key             Value
+ ──────────────────────────────────────────────
+  MODEL           Salesforce/codegen-350M-mono
+  NUM_GPUS        1
+  DEPLOY_METHOD   localhost
+  PORT            8000
+  TOKEN_LENGTH    16
+
+Enter to start deployment:
+```
+
+### Linux
+
+run the setup script. The inference model will be configured.
+
+or run the python script.
 
 ```shell
 Models available:
@@ -105,7 +168,7 @@ Just like [fauxpilot](https://github.com/moyix/fauxpilot) we can set `settings.j
 
 ## Notes
 
-The inference speed of the current inference service is relatively slow, so there is a `LOCK_MAX_TOKENS` environment variable in `setup.sh` to lock the maximum length to improve the inference speed. If you want to experience more powerful completion, you can increase the value of this variable.
+The inference speed of the current inference service is relatively slow, so there is a `TOKEN_LENGTH` environment variable in `setup.sh` to lock the maximum length to improve the inference speed. If you want to experience more powerful completion, you can increase the value of this variable.
 
 ## Acknowledge
 
