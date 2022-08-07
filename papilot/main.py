@@ -1,3 +1,4 @@
+from re import T
 import uvicorn
 from fastapi import FastAPI, Response, status
 from paddlenlp.transformers import CodeGenTokenizer, CodeGenForCausalLM
@@ -8,8 +9,9 @@ import paddle
 import random
 import string
 import json
+import os
 from sse_starlette.sse import EventSourceResponse
-from config import *
+from dotenv import load_dotenv, find_dotenv, dotenv_values
 
 
 class InputModel(BaseModel):
@@ -42,6 +44,8 @@ def random_completion_id():
     )
 
 
+load_dotenv(find_dotenv(filename="config.env"), override=True)
+
 env_dist = os.environ
 model_name = env_dist.get("MODEL", "Salesforce/codegen-350M-mono")
 # Init tokenizer
@@ -67,7 +71,7 @@ async def gen(item: InputModel):
     inputs = {k: paddle.to_tensor(v) for (k, v) in inputs.items()}
     output, score = codegen.generate(
         inputs["input_ids"],
-        max_length=env_dist.get("TOKEN_LENGTH", item.max_tokens),
+        max_length=int(env_dist.get("TOKEN_LENGTH", item.max_tokens)),
         decode_strategy="sampling",
         top_k=item.top_k,
         repetition_penalty=item.repetition_penalty,
@@ -112,4 +116,4 @@ async def gen(item: InputModel):
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=env_dist.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=int(env_dist.get("PORT", 8000)))
