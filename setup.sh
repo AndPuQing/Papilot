@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -f config.env ]; then
+if [ -f papilot/config.env ]; then
   echo "config.env already exists, skipping"
   echo "Please delete config.env if you want to re-run this script"
   exit 0
@@ -46,16 +46,17 @@ fi
 read -p "Port [8000]: " PORT
 PORT=${PORT:-8000}
 
-echo "lock_max_tokens [16]: " LOCK_MAX_TOKENS
-LOCK_MAX_TOKENS=${LOCK_MAX_TOKENS:-16}
+echo "lock_max_tokens [16]: " TOKEN_LENGTH
+TOKEN_LENGTH=${TOKEN_LENGTH:-16}
 
 # Write config.env
-echo "MODEL=${MODEL}" >config.env
-echo "NUM_GPUS=${NUM_GPUS}" >>config.env
-echo "PORT=${PORT}" >>config.env
+echo "MODEL=${MODEL}" >papilot/config.env
+echo "NUM_GPUS=${NUM_GPUS}" >>papilot/config.env
+echo "PORT=${PORT}" >>papilot/config.env
 
 if [ "$DEPLOYMENT" == "localhost" ]; then
   echo "Deploying to localhost"
+  cd papilot
   echo "install dependencies......"
   pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
   echo "done"
@@ -64,4 +65,3 @@ if [ "$DEPLOYMENT" == "localhost" ]; then
 else
   echo "Deploying to Docker"
 fi
- 

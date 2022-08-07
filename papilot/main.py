@@ -9,7 +9,7 @@ import random
 import string
 import json
 from sse_starlette.sse import EventSourceResponse
-from config import *
+from .config import *
 
 
 class InputModel(BaseModel):
@@ -56,18 +56,18 @@ app = FastAPI()
 @app.post("/v1/engines/codegen/completions", status_code=200)
 async def gen(item: InputModel):
     logger.info("Request: {}".format(item.dict()))
-    
+
     if item.temperature == 0.0:
         item.temperature = 1.0
         item.top_k = 1
-    
+
     start_time = time.time()
     logger.info("Start generating code")
     inputs = tokenizer([item.prompt])
     inputs = {k: paddle.to_tensor(v) for (k, v) in inputs.items()}
     output, score = codegen.generate(
         inputs["input_ids"],
-        max_length=env_dist.get("LOCK_MAX_TOKENS", item.max_tokens),
+        max_length=env_dist.get("TOKEN_LENGTH", item.max_tokens),
         decode_strategy="sampling",
         top_k=item.top_k,
         repetition_penalty=item.repetition_penalty,
@@ -96,11 +96,11 @@ async def gen(item: InputModel):
             "total_tokens": None,
         },
     )
-    
+
     def stream_response(response):
-        yield f'{json.dumps(response)}\n\n'
-        yield 'data: [DONE]\n\n'
-    
+        yield f"{json.dumps(response)}\n\n"
+        yield "data: [DONE]\n\n"
+
     if item.stream:
         return EventSourceResponse(stream_response(output_json.dict()))
     else:
