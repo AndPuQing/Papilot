@@ -22,7 +22,7 @@ jobs:
       run: echo "${{ secrets.ACCESS_TOKEN }}" | docker login -u puqingee --password-stdin
     - name: Push image
       run: |
-        IMAGE_ID=libra146/$IMAGE_NAME
+        IMAGE_ID=$IMAGE_NAME
         VERSION=latest
         echo IMAGE_ID=$IMAGE_ID
         echo VERSION=$VERSION
