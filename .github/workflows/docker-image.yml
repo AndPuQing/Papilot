@@ -6,7 +6,6 @@ on:
 env:
   # Docker image name
   IMAGE_NAME: papilot
-  VERSION: $(date +%s)
 
 jobs:
 
@@ -17,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $IMAGE_NAME:$VERSION
+      run: docker build . --file Dockerfile --tag $IMAGE_NAME
     
     - name: Log into registry
       run: echo "${{ secrets.ACCESS_TOKEN }}" | docker login -u puqingee --password-stdin
