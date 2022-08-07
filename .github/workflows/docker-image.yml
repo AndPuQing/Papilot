@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+
+env:
+  # Docker image name
+  IMAGE_NAME: papilot
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag $IMAGE_NAME
+    
+    - name: Log into registry
+      run: echo "${{ secrets.ACCESS_TOKEN }}" | docker login -u puqingee --password-stdin
+    - name: Push image
+      run: |
+        docker tag $IMAGE_NAME puqingee/$IMAGE_NAME
+        docker push puqingee/$IMAGE_NAME
