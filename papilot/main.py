@@ -1,6 +1,5 @@
 import uvicorn
 from fastapi import FastAPI, Response, status
-from paddlenlp.transformers import CodeGenTokenizer, CodeGenForCausalLM
 from pydantic import BaseModel
 from loguru import logger
 import time
@@ -11,6 +10,7 @@ import json
 import os
 from sse_starlette.sse import EventSourceResponse
 from dotenv import load_dotenv, find_dotenv
+from model import CodeGen
 
 
 class InputModel(BaseModel):
@@ -46,12 +46,6 @@ def random_completion_id():
 load_dotenv(find_dotenv(filename="config.env"), override=True)
 
 env_dist = os.environ
-model_name = env_dist.get("MODEL", "Salesforce/codegen-350M-mono")
-# Init tokenizer
-tokenizer = CodeGenTokenizer.from_pretrained(model_name)
-# Init model
-codegen = CodeGenForCausalLM.from_pretrained(model_name)
-logger.info("CodeGenForCausalLM loaded")
 
 app = FastAPI()
 
@@ -66,9 +60,9 @@ async def gen(item: InputModel):
 
     start_time = time.time()
     logger.info("Start generating code")
-    inputs = tokenizer([item.prompt])
+    inputs = CodeGen.encode(item.prompt)
     inputs = {k: paddle.to_tensor(v) for (k, v) in inputs.items()}
-    output, score = codegen.generate(
+    output, score = CodeGen.predict(
         inputs["input_ids"],
         max_length=int(env_dist.get("TOKEN_LENGTH", item.max_tokens)),
         decode_strategy="sampling",
@@ -80,7 +74,7 @@ async def gen(item: InputModel):
     logger.info("Finish generating code")
     end_time = time.time()
     logger.info("Time cost: {}".format(end_time - start_time))
-    output = tokenizer.decode(
+    output = CodeGen.decode(
         output[0], skip_special_tokens=True, spaces_between_special_tokens=False
     )
     output_json = OutputModel(
