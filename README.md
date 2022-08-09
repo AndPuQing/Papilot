@@ -159,7 +159,7 @@ Out[5]:
 }
 ```
 
-Or test via swagger at http://0.0.0.0:8000/docs
+Or test via swagger at http://127.0.0.1:8000/docs#
 
 ## Copilot Plugin
 
@@ -170,8 +170,8 @@ Just like [fauxpilot](https://github.com/moyix/fauxpilot) we can set `settings.j
 ```json
     "github.copilot.advanced": {
         "debug.overrideEngine": "codegen",
-        "debug.testOverrideProxyUrl": "http://0.0.0.0:8000",
-        "debug.overrideProxyUrl": "http://0.0.0.0:8000"
+        "debug.testOverrideProxyUrl": "http://127.0.0.1:8000",
+        "debug.overrideProxyUrl": "http://127.0.0.1:8000"
     }
 ```
 

@@ -10,13 +10,13 @@ class Model:
         self.tokenizer = CodeGenTokenizer.from_pretrained(model_name)
         # Init model
         self.codegen = CodeGenForCausalLM.from_pretrained(model_name)
-
-    def predict(self, **kwargs):
-        return self.codegen.generate(**kwargs)
-
+    
+    def predict(self, input_ids, **kwargs):
+        return self.codegen.generate(input_ids, **kwargs)
+    
     def encode(self, text):
         return self.tokenizer([text])
-
+    
     def decode(self, tokens, **kwargs):
         return self.tokenizer.decode(tokens, **kwargs)
 
