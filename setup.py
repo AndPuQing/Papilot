@@ -1,10 +1,9 @@
+import os
 from rich.console import Console
 from rich.table import Table
 from rich import box
-from papilot.config import *
 from dotenv import set_key, dotenv_values
 
-env_dist = os.environ
 LOGO = (
     "██████╗  █████╗ ██████╗ ██╗██╗      ██████╗ ████████╗\n"
     "██╔══██╗██╔══██╗██╔══██╗██║██║     ██╔═══██╗╚══██╔══╝\n"
@@ -29,6 +28,7 @@ console = Console()
 console.print(LOGO, style="bold red")
 console.print("[bold blue]An open-source GitHub Copilot server based PaddleNLP")
 console.print("\n")
+
 # Model selection
 MODELS_TABLE = Table(
     title="Models available",
