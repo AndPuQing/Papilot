@@ -1,4 +1,3 @@
-from re import T
 import uvicorn
 from fastapi import FastAPI, Response, status
 from paddlenlp.transformers import CodeGenTokenizer, CodeGenForCausalLM
@@ -11,7 +10,7 @@ import string
 import json
 import os
 from sse_starlette.sse import EventSourceResponse
-from dotenv import load_dotenv, find_dotenv, dotenv_values
+from dotenv import load_dotenv, find_dotenv
 
 
 class InputModel(BaseModel):
