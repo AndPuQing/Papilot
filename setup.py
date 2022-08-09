@@ -140,3 +140,5 @@ with console.status("[bold green]Deploying model..."):
     else:
         os.system("cd papilot && pip install -r requirements.txt")
         from papilot import main
+
+        main()

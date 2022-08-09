@@ -114,5 +114,9 @@ async def gen(item: InputModel):
         )
 
 
-if __name__ == "__main__":
+def main():
     uvicorn.run("main:app", host="0.0.0.0", port=int(env_dist.get("PORT", 8000)))
+
+
+if __name__ == "__main__":
+    main()
