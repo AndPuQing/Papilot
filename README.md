@@ -175,6 +175,11 @@ Just like [fauxpilot](https://github.com/moyix/fauxpilot) we can set `settings.j
     }
 ```
 
+## Papilot-extension
+In addition, Papilot has also open sourced the corresponding vscode extension, you can check the details at the link below.
+
+[Papilot-extension](https://github.com/AndPuQing/Papilot-extension)
+
 ## Notes
 
 The inference speed of the current inference service is relatively slow, so there is a `TOKEN_LENGTH` environment variable in `setup.sh` to lock the maximum length to improve the inference speed. If you want to experience more powerful completion, you can increase the value of this variable.
